@@ -1,0 +1,40 @@
+﻿@model Vloga
+
+<form asp-action="NovaVloga" method="post">
+    <div class="form-group">
+        <label class="form-label"><b>Strokovni delavci</b></label>
+        <label class="form-label">Izberite vsaj 3 delavce, ki izpolnjujejo pogoje:</label>
+        <ul>
+            <li>zaposlitev traja več kot 3 leta</li>
+            <li>opravljen strokovni izpit</li>
+            <li>opravljen pedagoški izpit</li>
+        </ul>
+        @foreach (var delavec in Model.Delavci)
+        {
+            <div class="form-check">
+                <input type="checkbox" id="delavec_@delavec.Id" name="SelectedDelavci" value="@delavec.Id" class="form-check-input" />
+                <label for="delavec_@delavec.Id" class="form-check-label">@delavec.Ime @delavec.Priimek</label>
+                @{
+                    DateOnly datumZaposlitve = delavec.DatumZaposlitve;
+                    DateTime currentDate = DateTime.Now.Date;
+
+                    int years = currentDate.Year - datumZaposlitve.Year;
+                    int months = currentDate.Month - datumZaposlitve.Month;
+
+                    if (months < 0)
+                    {
+                        years--;
+                        months += 12;
+                    }
+                }
+                <ul>
+                    <li>Trajanje zaposlitve: @years leta @months meseci</li>
+                    <li>Strokovni izpit: @delavec.StrokovniIzpitString</li>
+                    <li>Pedagoški izpit: @delavec.PedagoskiIzpitString</li>
+                </ul>
+            </div>
+        }
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Oddaj vlogo</button>
+</form>

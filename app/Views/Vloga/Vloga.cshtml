@@ -1,0 +1,38 @@
+﻿@model Vloga
+
+<p>Vlagatelj: @Model.Vlagatelj.Email</p>
+<p>Strokovni delavci:</p>
+<table>
+    <thead>
+        <tr>
+            <td>Ime</td>
+            <td>Priimek</td>
+            <td>Trajanje zaposlitve</td>
+            <td>Strokovni izpit</td>
+            <td>Pedagoški izpit</td>
+        </tr>
+    </thead>
+    @foreach (var delavec in Model.Delavci)
+    {
+        <tr>
+            <td>@delavec.Ime</td>
+            <td>@delavec.Priimek</td>
+            @{
+                DateOnly datumZaposlitve = delavec.DatumZaposlitve;
+                DateTime currentDate = DateTime.Now.Date;
+
+                int years = currentDate.Year - datumZaposlitve.Year;
+                int months = currentDate.Month - datumZaposlitve.Month;
+
+                if (months < 0)
+                {
+                    years--;
+                    months += 12;
+                }
+            }
+            <td>@years leta @months meseci</td>
+            <td>@delavec.StrokovniIzpitString</td>
+            <td>@delavec.PedagoskiIzpitString</td>
+        </tr>
+    }
+</table>
