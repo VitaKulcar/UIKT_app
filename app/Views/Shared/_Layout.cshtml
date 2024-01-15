@@ -35,7 +35,10 @@
                             </li>
                         }
                     </ul>
-                    <partial name="_LoginPartial" />
+                    @if (ViewBag.PrivacyAccepted == true)
+                    {
+                        <partial name="_LoginPartial" />
+                    }
                 </div>
             </div>
         </nav>

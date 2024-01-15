@@ -1,0 +1,11 @@
+﻿@using (Html.BeginForm("PotrdiPrivolitev", "Home", FormMethod.Post))
+{
+    <label>
+        Strinjam se s
+        <a href="@Url.Action("PogojiZasebnosti", "Home")">pogoji zasebnosti</a>
+        in
+        <a href="@Url.Action("UporabaPiskotkov", "Home")">uporabo piškotkov</a>
+        <input type="checkbox" name="Privolitev" value="true" required />
+    </label>
+    <button type="submit" class="btn btn-success">Potrdi privolitev</button>
+}

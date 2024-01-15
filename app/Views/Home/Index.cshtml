@@ -4,4 +4,12 @@
 
 <div class="text-center">
     <h1 class="display-4">Ministrstvo za zdravje</h1>
+    @if (ViewBag.PrivacyAccepted == true)
+    {
+        <label>Strinjali ste se s pogoji uporabe piškotkov in pogoji zasebnosti</label>
+    }
+    else
+    {
+        @Html.Partial("Privolitev")
+    }
 </div>

@@ -11,5 +11,30 @@ namespace app.Controllers
         {
             return View();
         }
+
+        public IActionResult PogojiZasebnosti()
+        {
+            return View();
+        }
+
+        public IActionResult UporabaPiskotkov()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PotrdiPrivolitev(bool Privolitev)
+        {
+            if (Privolitev)
+            {
+                ViewBag.PrivacyAccepted = true;
+            }
+            else
+            {
+                ViewBag.PrivacyAccepted = false;
+            }
+
+            return View("Index");
+        }
     }
 }
